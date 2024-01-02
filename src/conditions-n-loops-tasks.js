@@ -160,8 +160,46 @@ function convertToRomanNumerals(num) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  const STRINGS = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+    'minus',
+    'point',
+  ];
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    if (Number.isNaN(Number(numberStr[i]))) {
+      switch (numberStr[i]) {
+        case '.':
+          result += ` ${STRINGS[STRINGS.length - 1]}`;
+          break;
+        case ',':
+          result += ` ${STRINGS[STRINGS.length - 1]}`;
+          break;
+        case '-':
+          result += ` ${STRINGS[STRINGS.length - 2]}`;
+          break;
+        default:
+          result += '';
+      }
+    } else {
+      result += ` ${STRINGS[Number(numberStr[i])]}`;
+    }
+  }
+  let resultTrimmed = '';
+  for (let i = 1; i < result.length; i += 1) {
+    resultTrimmed += result[i];
+  }
+  return resultTrimmed;
 }
 
 /**
